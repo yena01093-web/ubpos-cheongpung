@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #fdfaf5;
+  --foreground: #20180f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-dodum), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #c8622f;
+  color: #fdfaf5;
+}
+
+@layer components {
+  /* 종이 질감 — 사진이 없는 동안 화면을 덜 비어 보이게 하는 바탕 */
+  .paper {
+    background-image: radial-gradient(
+        circle at 1px 1px,
+        rgba(32, 24, 15, 0.045) 1px,
+        transparent 0
+      );
+    background-size: 22px 22px;
+  }
+
+  /* 여행 경로처럼 이어지는 점선 */
+  .dotted-route {
+    background-image: repeating-linear-gradient(
+      to right,
+      currentColor 0 6px,
+      transparent 6px 14px
+    );
+  }
+
+  /* 여권 스탬프 */
+  .stamp {
+    border: 2px solid currentColor;
+    border-radius: 9999px;
+    letter-spacing: 0.18em;
+    opacity: 0.75;
+    transform: rotate(-9deg);
+  }
+
+  /* 섹션 눈썹 라벨 */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.3em] text-spice-600;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply block h-px w-8 bg-spice-400;
+  }
+
+  /* 탑승권 절취선 */
+  .perforation {
+    background-image: radial-gradient(
+      circle at 5px 50%,
+      transparent 0 5px,
+      currentColor 5px 6px,
+      transparent 6px
+    );
+    background-size: 14px 100%;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .writing-vertical {
+    writing-mode: vertical-rl;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
